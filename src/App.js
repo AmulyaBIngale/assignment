@@ -3,6 +3,9 @@ import Table from "./components/Table";
 import Pagination from "./components/Pagination";
 import "./index.css";
 
+const API_URL = "https://raw.githubusercontent.com/saaslabsco/frontend-assignment/refs/heads/master/frontend-assignment.json";
+console.log(process.env.REACT_APP_API_URL)
+
 const App = () => {
   const [projects, setProjects] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
@@ -10,10 +13,11 @@ const App = () => {
 
   useEffect(() => {
     fetch(
-      "https://raw.githubusercontent.com/saaslabsco/frontend-assignment/refs/heads/master/frontend-assignment.json"
+      `${API_URL}`
     )
       .then((response) => response.json())
       .then((data) => {
+        console.log(data)
         const formattedProjects = data.map((project, index) => ({
           id: index,
           percentageFunded: project["percentage.funded"],
